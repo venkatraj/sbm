@@ -7,6 +7,9 @@ abstract class ValueObject<T> {
   const ValueObject();
   Either<ValueFailure<T>, T> get value;
 
+  T getOrCrash() =>
+      value.fold((failure) => throw UnexpectedValueError(failure), id);
+
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
