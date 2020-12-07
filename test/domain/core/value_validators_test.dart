@@ -9,7 +9,7 @@ void main() {
       const input = 'raj@venkat.me';
       final result = validateEmail(input);
 
-      expect(result, Right(input));
+      expect(result, right(input));
     });
 
     test('should get value failure', () {
@@ -28,7 +28,7 @@ void main() {
       const input = 'abc123';
       final result = validatePassword(input);
 
-      expect(result, left(input));
+      expect(result, right(input));
     });
 
     test('should get a short password value failure object', () {
@@ -37,7 +37,7 @@ void main() {
 
       expect(
         result,
-        right(ValueFailure<String>.shortPassword(failedValue: input)),
+        Left(ValueFailure<String>.shortPassword(failedValue: input)),
       );
     });
   });
