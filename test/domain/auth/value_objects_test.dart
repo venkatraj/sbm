@@ -9,7 +9,7 @@ void main() {
       const validInput = 'raj@venkat.me';
       final result = EmailAddress(validInput);
 
-      expect(result.value, const Right(validInput));
+      expect(result.value, right(validInput));
     });
 
     test('should return an invalid email value failure', () {
@@ -18,7 +18,8 @@ void main() {
 
       expect(
         result.value,
-        left(ValueFailure<String>.invalidEmail(failedValue: invalidInput)),
+        left(
+            const ValueFailure<String>.invalidEmail(failedValue: invalidInput)),
       );
     });
   });
@@ -39,7 +40,8 @@ void main() {
       final result = Password(invalidInput);
       expect(
         result.value,
-        left(ValueFailure<String>.shortPassword(failedValue: invalidInput)),
+        left(const ValueFailure<String>.shortPassword(
+            failedValue: invalidInput)),
       );
     });
   });

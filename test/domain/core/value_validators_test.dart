@@ -18,7 +18,7 @@ void main() {
 
       expect(
         result,
-        left(ValueFailure<String>.invalidEmail(failedValue: input)),
+        left(const ValueFailure<String>.invalidEmail(failedValue: input)),
       );
     });
   });
@@ -37,7 +37,7 @@ void main() {
 
       expect(
         result,
-        Left(ValueFailure<String>.shortPassword(failedValue: input)),
+        left(const ValueFailure<String>.shortPassword(failedValue: input)),
       );
     });
   });
