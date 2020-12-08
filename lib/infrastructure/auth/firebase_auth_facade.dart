@@ -1,12 +1,14 @@
 import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
+import 'package:sbm/application/auth/user.dart';
 
 import '../../domain/auth/auth_failures.dart';
 import '../../domain/auth/i_auth_facade.dart';
 import '../../domain/auth/value_objects.dart';
+import 'firebase_user_mapper.dart';
 
 @Injectable(as: IAuthFacade)
 class FirebaseAuthFacade implements IAuthFacade {
@@ -78,4 +80,16 @@ class FirebaseAuthFacade implements IAuthFacade {
       return left(const AuthFailure.serverError());
     }
   }
+
+  @override
+  Future<Option<User>> getSignedInUser() async {
+    final firebaseUser = _firebaseAuth.currentUser;
+    return optionOf(firebaseUser?.toDomain());
+  }
+
+  @override
+  Future<void> signOut() => Future.wait([
+        _googleSignIn.signOut(),
+        _firebaseAuth.signOut(),
+      ]);
 }
