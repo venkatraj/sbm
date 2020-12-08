@@ -43,7 +43,7 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
         yield* _performActionInAuthFacade(
             _authFacade.signInWithEmailAndPassword);
       },
-      signInWithGoogle: (e) async* {
+      signInWithGooglePressed: (e) async* {
         state.copyWith(
           isSubmitting: true,
           authFailureOrSuccessOption: none(),

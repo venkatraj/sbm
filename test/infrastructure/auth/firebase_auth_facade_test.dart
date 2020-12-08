@@ -12,7 +12,6 @@ void main() {
 
   final emailAddress = EmailAddress('raj@venkat.me');
   final password = Password('abc1234');
-  final invalidPassword = Password('123');
 
   setUp(() {
     firebaseAuthFacade = MockFirebaseAuthFacade();
